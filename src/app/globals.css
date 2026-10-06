@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light mode CSS variables */
+:root {
+  --bg-primary: #fdf6e3; /* warm cream */
+  --bg-gradient-1: #ffecd2;
+  --bg-gradient-2: #fcb69f;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --badge-safe: #10b981;
+  --badge-caution: #f59e0b;
+  --badge-danger: #ef4444;
+}
+
+/* Dark mode overrides */
+.dark {
+  --bg-primary: #0f172a; /* slate‑950 */
+  --bg-gradient-1: #1e3a8a; /* dark blue */
+  --bg-gradient-2: #4c1d95; /* deep purple */
+  --glass-bg: rgba(15, 23, 42, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --badge-safe: #34d399;
+  --badge-caution: #fbbf24;
+  --badge-danger: #f87171;
+}
+
+body {
+  background: var(--bg-primary);
+  background-image: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
+  background-attachment: fixed;
+  font-smoothing: antialiased;
+}
+
+/* Glass‑morphism card */
+.glass-card {
+  @apply backdrop-blur-lg rounded-xl border border-[color:var(--glass-border)] bg-[color:var(--glass-bg)] shadow-lg transition-colors;
+}
+.glass-card-hover:hover {
+  @apply shadow-xl scale-105;
+}
+
+/* Badge glow for risk levels */
+.badge-glow-safe {
+  box-shadow: 0 0 8px 2px var(--badge-safe);
+}
+.badge-glow-caution {
+  box-shadow: 0 0 8px 2px var(--badge-caution);
+}
+.badge-glow-danger {
+  box-shadow: 0 0 8px 2px var(--badge-danger);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 4px 1px var(--badge-safe); }
+  50% { box-shadow: 0 0 12px 4px var(--badge-safe); }
+  100% { box-shadow: 0 0 4px 1px var(--badge-safe); }
+}
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Utility classes for animated background */
+.bg-animated {
+  background-size: 200% 200%;
+  animation: gradient-shift 12s ease infinite;
+}
